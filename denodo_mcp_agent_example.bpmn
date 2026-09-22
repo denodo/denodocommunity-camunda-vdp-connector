@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_DenodoMcpExample" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.50.1" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.9.0">
+  <bpmn:process id="Process_DenodoMcpAgent" name="Denodo MCP Agent" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_UserQuestion" name="User question received">
+      <bpmn:outgoing>Flow_StartToAgent</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_StartToAgent" sourceRef="StartEvent_UserQuestion" targetRef="Activity_AiAgent" />
+    <bpmn:adHocSubProcess id="Activity_AiAgent" name="AI Agent (with Denodo tool)" zeebe:modelerTemplate="io.camunda.connectors.agenticai.aiagent.jobworker.v1" zeebe:modelerTemplateVersion="7" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNBNTZFRkYiLz4KPG1hc2sgaWQ9InBhdGgtMi1vdXRzaWRlLTFfMTg1XzYiIG1hc2tVbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjQiIHk9IjQiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0iYmxhY2siPgo8cmVjdCBmaWxsPSJ3aGl0ZSIgeD0iNCIgeT0iNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ii8+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAuMDEwNSAxMi4wOTg3QzE4LjQ5IDEwLjU4OTQgMTcuMTU5NCA4LjEwODE0IDE2LjE3OTkgNi4wMTEwM0MxNi4xNTIgNi4wMDQ1MSAxNi4xMTc2IDYgMTYuMDc5NCA2QzE2LjA0MTEgNiAxNi4wMDY2IDYuMDA0NTEgMTUuOTc4OCA2LjAxMTA0QzE0Ljk5OTQgOC4xMDgxNCAxMy42Njk3IDEwLjU4ODkgMTIuMTQ4MSAxMi4wOTgxQzEwLjYyNjkgMTMuNjA3MSA4LjEyNTY4IDE0LjkyNjQgNi4wMTE1NyAxNS44OTgxQzYuMDA0NzQgMTUuOTI2MSA2IDE1Ljk2MTEgNiAxNkM2IDE2LjAzODcgNi4wMDQ2OCAxNi4wNzM2IDYuMDExNDQgMTYuMTAxNEM4LjEyNTE5IDE3LjA3MjkgMTAuNjI2MiAxOC4zOTE5IDEyLjE0NzcgMTkuOTAxNkMxMy42Njk3IDIxLjQxMDcgMTQuOTk5NiAyMy44OTIgMTUuOTc5MSAyNS45ODlDMTYuMDA2OCAyNS45OTU2IDE2LjA0MTEgMjYgMTYuMDc5MyAyNkMxNi4xMTc1IDI2IDE2LjE1MTkgMjUuOTk1NCAxNi4xNzk2IDI1Ljk4OUMxNy4xNTkxIDIzLjg5MiAxOC40ODg4IDIxLjQxMSAyMC4wMDk5IDE5LjkwMjFNMjAuMDA5OSAxOS45MDIxQzIxLjUyNTMgMTguMzk4NyAyMy45NDY1IDE3LjA2NjkgMjUuOTkxNSAxNi4wODI0QzI1Ljk5NjUgMTYuMDU5MyAyNiAxNi4wMzEgMjYgMTUuOTk5N0MyNiAxNS45Njg0IDI1Ljk5NjUgMTUuOTQwMyAyNS45OTE1IDE1LjkxNzFDMjMuOTQ3NCAxNC45MzI3IDIxLjUyNTkgMTMuNjAxIDIwLjAxMDUgMTIuMDk4NyIvPgo8L21hc2s+CjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMjAuMDEwNSAxMi4wOTg3QzE4LjQ5IDEwLjU4OTQgMTcuMTU5NCA4LjEwODE0IDE2LjE3OTkgNi4wMTEwM0MxNi4xNTIgNi4wMDQ1MSAxNi4xMTc2IDYgMTYuMDc5NCA2QzE2LjA0MTEgNiAxNi4wMDY2IDYuMDA0NTEgMTUuOTc4OCA2LjAxMTA0QzE0Ljk5OTQgOC4xMDgxNCAxMy42Njk3IDEwLjU4ODkgMTIuMTQ4MSAxMi4wOTgxQzEwLjYyNjkgMTMuNjA3MSA4LjEyNTY4IDE0LjkyNjQgNi4wMTE1NyAxNS44OTgxQzYuMDA0NzQgMTUuOTI2MSA2IDE1Ljk2MTEgNiAxNkM2IDE2LjAzODcgNi4wMDQ2OCAxNi4wNzM2IDYuMDExNDQgMTYuMTAxNEM4LjEyNTE5IDE3LjA3MjkgMTAuNjI2MiAxOC4zOTE5IDEyLjE0NzcgMTkuOTAxNkMxMy42Njk3IDIxLjQxMDcgMTQuOTk5NiAyMy44OTIgMTUuOTc5MSAyNS45ODlDMTYuMDA2OCAyNS45OTU2IDE2LjA0MTEgMjYgMTYuMDc5MyAyNkMxNi4xMTc1IDI2IDE2LjE1MTkgMjUuOTk1NCAxNi4xNzk2IDI1Ljk4OUMxNy4xNTkxIDIzLjg5MiAxOC40ODg4IDIxLjQxMSAyMC4wMDk5IDE5LjkwMjFNMjAuMDA5OSAxOS45MDIxQzIxLjUyNTMgMTguMzk4NyAyMy45NDY1IDE3LjA2NjkgMjUuOTkxNSAxNi4wODI0QzI1Ljk5NjUgMTYuMDU5MyAyNiAxNi4wMzEgMjYgMTUuOTk5N0MyNiAxNS45Njg0IDI1Ljk5NjUgMTUuOTQwMyAyNS45OTE1IDE1LjkxNzFDMjMuOTQ3NCAxNC45MzI3IDIxLjUyNTkgMTMuNjAxIDIwLjAxMDUgMTIuMDk4NyIgZmlsbD0id2hpdGUiLz4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMC4wMTA1IDEyLjA5ODdDMTguNDkgMTAuNTg5NCAxNy4xNTk0IDguMTA4MTQgMTYuMTc5OSA2LjAxMTAzQzE2LjE1MiA2LjAwNDUxIDE2LjExNzYgNiAxNi4wNzk0IDZDMTYuMDQxMSA2IDE2LjAwNjYgNi4wMDQ1MSAxNS45Nzg4IDYuMDExMDRDMTQuOTk5NCA4LjEwODE0IDEzLjY2OTcgMTAuNTg4OSAxMi4xNDgxIDEyLjA5ODFDMTAuNjI2OSAxMy42MDcxIDguMTI1NjggMTQuOTI2NCA2LjAxMTU3IDE1Ljg5ODFDNi4wMDQ3NCAxNS45MjYxIDYgMTUuOTYxMSA2IDE2QzYgMTYuMDM4NyA2LjAwNDY4IDE2LjA3MzYgNi4wMTE0NCAxNi4xMDE0QzguMTI1MTkgMTcuMDcyOSAxMC42MjYyIDE4LjM5MTkgMTIuMTQ3NyAxOS45MDE2QzEzLjY2OTcgMjEuNDEwNyAxNC45OTk2IDIzLjg5MiAxNS45NzkxIDI1Ljk4OUMxNi4wMDY4IDI1Ljk5NTYgMTYuMDQxMSAyNiAxNi4wNzkzIDI2QzE2LjExNzUgMjYgMTYuMTUxOSAyNS45OTU0IDE2LjE3OTYgMjUuOTg5QzE3LjE1OTEgMjMuODkyIDE4LjQ4ODggMjEuNDExIDIwLjAwOTkgMTkuOTAyMU0yMC4wMDk5IDE5LjkwMjFDMjEuNTI1MyAxOC4zOTg3IDIzLjk0NjUgMTcuMDY2OSAyNS45OTE1IDE2LjA4MjRDMjUuOTk2NSAxNi4wNTkzIDI2IDE2LjAzMSAyNiAxNS45OTk3QzI2IDE1Ljk2ODQgMjUuOTk2NSAxNS45NDAzIDI1Ljk5MTUgMTUuOTE3MUMyMy45NDc0IDE0LjkzMjcgMjEuNTI1OSAxMy42MDEgMjAuMDEwNSAxMi4wOTg3IiBzdHJva2U9IiM0OTFEOEIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgbWFzaz0idXJsKCNwYXRoLTItb3V0c2lkZS0xXzE4NV82KSIvPgo8L3N2Zz4K">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda.agenticai:aiagent-job-worker:1" retries="3" />
+        <zeebe:adHoc outputCollection="toolCallResults" outputElement="={&#10;  id: toolCall._meta.id,&#10;  name: toolCall._meta.name,&#10;  content: toolCallResult&#10;}" />
+        <zeebe:properties>
+          <zeebe:property name="io.camunda.agenticai.toolContainer" value="true" />
+        </zeebe:properties>
+        <zeebe:ioMapping>
+          <zeebe:input source="openai" target="provider.type" />
+          <zeebe:input source="{{secrets.OPENAI_API_KEY}}" target="provider.openai.authentication.apiKey" />
+          <zeebe:input source="&#60;YOUR_MODEL_NAME&#62;" target="provider.openai.model.model" />
+          <zeebe:input source="=&#34;You are a helpful assistant with access to tools for querying a Denodo database. Use the available tools to answer the user&#39;s question. If no tool is relevant, answer from your own knowledge or explain why you cannot.&#34;" target="data.systemPrompt.prompt" />
+          <zeebe:input source="=userQuestion" target="data.userPrompt.prompt" />
+          <zeebe:input target="agentContext" />
+          <zeebe:input source="in-process" target="data.memory.storage.type" />
+          <zeebe:input source="=20" target="data.memory.contextWindowSize" />
+          <zeebe:input source="=10" target="data.limits.maxModelCalls" />
+          <zeebe:input source="WAIT_FOR_TOOL_CALL_RESULTS" target="data.events.behavior" />
+          <zeebe:input source="text" target="data.response.format.type" />
+          <zeebe:input source="=false" target="data.response.format.parseJson" />
+          <zeebe:input source="=false" target="data.response.includeAssistantMessage" />
+          <zeebe:input source="=false" target="data.response.includeAgentContext" />
+          <zeebe:input target="agent" />
+          <zeebe:output source="=agent" target="agent" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="7" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.agenticai.aiagent.jobworker.v1" />
+          <zeebe:header key="errorExpression" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_StartToAgent</bpmn:incoming>
+      <bpmn:outgoing>Flow_AgentToEnd</bpmn:outgoing>
+      <bpmn:serviceTask id="Activity_QueryDenodoSales" name="Query Denodo (sales database)" zeebe:modelerTemplate="com.denodo.connectors.mcp.remoteclient.v1" zeebe:modelerTemplateIcon="data:image/png;base64,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">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="io.camunda.agenticai:mcpremoteclient:1" retries="3" />
+          <zeebe:ioMapping>
+            <zeebe:input source="http" target="data.transport.type" />
+            <zeebe:input source="streamable-http" target="data.transport.http.mode" />
+            <zeebe:input source="https://your-denodo-host.example.com:9090/sales/mcp" target="data.transport.http.url" />
+            <zeebe:input source="basic" target="data.transport.http.authentication.type" />
+            <zeebe:input source="{{secrets.DENODO_USERNAME}}" target="data.transport.http.authentication.username" />
+            <zeebe:input source="{{secrets.DENODO_PASSWORD}}" target="data.transport.http.authentication.password" />
+            <zeebe:input source="false" target="data.options.clientCache" />
+            <zeebe:input source="aiAgentTool" target="data.connectorMode.type" />
+            <zeebe:input source="=toolCall.method" target="data.connectorMode.toolOperation.method" />
+            <zeebe:input source="=toolCall.params" target="data.connectorMode.toolOperation.params" />
+          </zeebe:ioMapping>
+          <zeebe:properties>
+            <zeebe:property name="io.camunda.agenticai.gateway.type" value="mcpClient" />
+          </zeebe:properties>
+          <zeebe:taskHeaders>
+            <zeebe:header key="resultVariable" value="toolCallResult" />
+            <zeebe:header key="retryBackoff" value="PT30S" />
+          </zeebe:taskHeaders>
+        </bpmn:extensionElements>
+      </bpmn:serviceTask>
+    </bpmn:adHocSubProcess>
+    <bpmn:sequenceFlow id="Flow_AgentToEnd" sourceRef="Activity_AiAgent" targetRef="Event_Done" />
+    <bpmn:intermediateThrowEvent id="Event_Done" name="Answer ready">
+      <bpmn:incoming>Flow_AgentToEnd</bpmn:incoming>
+    </bpmn:intermediateThrowEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_DenodoMcpAgent">
+      <bpmndi:BPMNShape id="StartEvent_UserQuestion_di" bpmnElement="StartEvent_UserQuestion">
+        <dc:Bounds x="152" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_AiAgent_di" bpmnElement="Activity_AiAgent" isExpanded="true">
+        <dc:Bounds x="280" y="80" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_QueryDenodoSales_di" bpmnElement="Activity_QueryDenodoSales">
+        <dc:Bounds x="405" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_Done_di" bpmnElement="Event_Done">
+        <dc:Bounds x="722" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_StartToAgent_di" bpmnElement="Flow_StartToAgent">
+        <di:waypoint x="188" y="150" />
+        <di:waypoint x="280" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_AgentToEnd_di" bpmnElement="Flow_AgentToEnd">
+        <di:waypoint x="630" y="180" />
+        <di:waypoint x="722" y="180" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,270 @@
+{
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "Denodo MCP Connector",
+  "id": "com.denodo.connectors.mcp.remoteclient.v1",
+  "description": "Connect an AI agent to a Denodo Virtual DataPort database via its built-in MCP server, so the agent can discover and query Denodo views as tools.",
+  "documentationRef": "https://community.denodo.com/docs/html/browse/latest/en/vdp/developer/model_context_protocol_mcp/model_context_protocol_mcp",
+  "category": {
+    "id": "connectors",
+    "name": "Connectors"
+  },
+  "appliesTo": [
+    "bpmn:Task"
+  ],
+  "elementType": {
+    "value": "bpmn:ServiceTask"
+  },
+  "groups": [
+    {
+      "id": "endpoint",
+      "label": "Denodo connection"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication"
+    },
+    {
+      "id": "options",
+      "label": "Options"
+    },
+    {
+      "id": "output",
+      "label": "Output mapping"
+    }
+  ],
+  "properties": [
+    {
+      "type": "Hidden",
+      "value": "io.camunda.agenticai:mcpremoteclient:1",
+      "binding": {
+        "type": "zeebe:taskDefinition:type"
+      }
+    },
+    {
+      "label": "Retries",
+      "type": "String",
+      "value": "3",
+      "group": "options",
+      "binding": {
+        "type": "zeebe:taskDefinition",
+        "property": "retries"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "http",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.type"
+      }
+    },
+    {
+      "label": "Transport type",
+      "type": "Dropdown",
+      "group": "endpoint",
+      "value": "streamable-http",
+      "choices": [
+        {
+          "name": "Streamable HTTP (recommended)",
+          "value": "streamable-http"
+        },
+        {
+          "name": "HTTP with SSE (legacy, deprecated by Denodo)",
+          "value": "sse"
+        }
+      ],
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.http.mode"
+      },
+      "description": "Denodo recommends Streamable HTTP for new integrations. SSE is supported only for backward compatibility."
+    },
+    {
+      "label": "Denodo MCP server URL",
+      "type": "String",
+      "group": "endpoint",
+      "constraints": {
+        "notEmpty": true
+      },
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.http.url"
+      },
+      "description": "Full URL to your Denodo MCP endpoint, in the form https://<denodo-host>:<port>/<vdb-name>/mcp \u2014 for example https://denodo.mycompany.com:9090/sales/mcp."
+    },
+    {
+      "id": "authType",
+      "label": "Authentication type",
+      "type": "Dropdown",
+      "group": "authentication",
+      "value": "basic",
+      "choices": [
+        {
+          "name": "None",
+          "value": "none"
+        },
+        {
+          "name": "Basic (username / password)",
+          "value": "basic"
+        },
+        {
+          "name": "OAuth 2.0",
+          "value": "oauth2"
+        }
+      ],
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.http.authentication.type"
+      },
+      "description": "Match this to how your Denodo administrator configured MCP server authentication."
+    },
+    {
+      "label": "Username",
+      "type": "String",
+      "group": "authentication",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.http.authentication.username"
+      },
+      "condition": {
+        "property": "authType",
+        "equals": "basic"
+      }
+    },
+    {
+      "label": "Password",
+      "type": "String",
+      "group": "authentication",
+      "feel": "optional",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.http.authentication.password"
+      },
+      "condition": {
+        "property": "authType",
+        "equals": "basic"
+      },
+      "description": "Reference a Camunda secret instead of a plaintext password, e.g. {{secrets.DENODO_PASSWORD}}."
+    },
+    {
+      "label": "OAuth 2.0 Token URL",
+      "type": "String",
+      "group": "authentication",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.http.authentication.oauth2.tokenUrl"
+      },
+      "condition": {
+        "property": "authType",
+        "equals": "oauth2"
+      }
+    },
+    {
+      "label": "Client ID",
+      "type": "String",
+      "group": "authentication",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.http.authentication.oauth2.clientId"
+      },
+      "condition": {
+        "property": "authType",
+        "equals": "oauth2"
+      }
+    },
+    {
+      "label": "Client Secret",
+      "type": "String",
+      "group": "authentication",
+      "feel": "optional",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.http.authentication.oauth2.clientSecret"
+      },
+      "condition": {
+        "property": "authType",
+        "equals": "oauth2"
+      },
+      "description": "Reference a Camunda secret instead of a plaintext value, e.g. {{secrets.DENODO_OAUTH_CLIENT_SECRET}}."
+    },
+    {
+      "label": "Scope",
+      "type": "String",
+      "group": "authentication",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.transport.http.authentication.oauth2.scope"
+      },
+      "condition": {
+        "property": "authType",
+        "equals": "oauth2"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "false",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.options.clientCache"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "aiAgentTool",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.connectorMode.type"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "=toolCall.method",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.connectorMode.toolOperation.method"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "=toolCall.params",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "data.connectorMode.toolOperation.params"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "mcpClient",
+      "binding": {
+        "type": "zeebe:property",
+        "name": "io.camunda.agenticai.gateway.type"
+      }
+    },
+    {
+      "label": "Result variable",
+      "type": "String",
+      "group": "output",
+      "value": "toolCallResult",
+      "binding": {
+        "type": "zeebe:taskHeader",
+        "key": "resultVariable"
+      }
+    },
+    {
+      "label": "Retry backoff",
+      "type": "String",
+      "group": "output",
+      "value": "PT30S",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:taskHeader",
+        "key": "retryBackoff"
+      },
+      "description": "ISO-8601 duration to wait before retrying a failed call, e.g. PT30S for 30 seconds."
+    }
+  ],
+  "icon": {
+    "contents": "data:image/png;base64,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"
+  }
+}
